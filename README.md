@@ -40,7 +40,7 @@ There is a completely 3D printable version available at [Thingiverse](http://www
 
 ## What if I don't have a Laser Cutter / 3D Printer?!
 
-Neither do I! The best way to get some help creating the parts is to look up your local [Hackerspace or Makerspace ](http://hackerspaces.org) and connect with them. I belong to a fantastic hackerspace in Las Vegas called [SYN Shop](http://synshop.org)!
+Neither do I! The best way to get some help creating the parts is to look up your local [Hackerspace or Makerspace ](http://hackerspaces.org) and connect with them. Our Johannesburg makerspace called [Makerlabs](http://makerlabs.co.za) hosted at [Made In Workshop](http://madeinworkshop.co.za/)
 
 [<img src="https://github.com/makenai/sumobot-jr/raw/master/assets/synshop.png">](http://synshop.org)
 
@@ -48,14 +48,14 @@ If you don't have a hackerspace nearby, you can also use a mail order service li
 
 ## Other Parts Needed
 
-+ [Arduino](https://www.pololu.com/product/2191) - ~$25
-+ [4xAA battery holder](http://www.amazon.com/gp/product/B007Q2NR1O/ref=oh_aui_search_detailpage?ie=UTF8&amp;psc=1) - $2
-+ 2 Zip ties - ?
-+ 5 \#4 3/8" wood screws - ?
-+ Thick rubber bands - ?
-+ 2 continuous servo motors like [Futaba S148](http://www.pololu.com/catalog/product/536) or the ones from [SpringRC](http://www.pololu.com/product/1248) - $24-$28
++ [Arduino](https://www.robotics.org.za/arduino-boards-and-accessories.html/arduino-uno-r3.html) - R189
++ [4xAA battery holder](https://www.robotics.org.za/battery-holder-4xaa.html?search=battery%20holder) - R18
++ 2 Cable ties 4.7 x198mm works well Hellermann Tyton T50R - ?
++ 5 3.0 x 12mm wood screws Eureka - ?
++ Thick rubber bands [Croxley No 64] - ?
++ 2 continuous servo motors [Power AR-3606HB](https://www.robotics.org.za/servo-motors-1821899125/power-hd-continuous-rot-servo-6-7kg-cm.html) - R225
 + Some wire or leads
-+ 16mm ball bearing - ?
++ 16mm steel ball from a Bearing shop like BMG - ~R6
 
 ## No-solder Wiring Diagram (thanks @katiek2)
 
@@ -74,7 +74,7 @@ git clone https://github.com/makenai/sumobot-jr
 
 Navigate to the code folder:
 ```
-cd code_example
+cd code_examples/node
 ```
 
 Install code dependencies:
