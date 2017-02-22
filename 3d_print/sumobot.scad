@@ -36,10 +36,10 @@
   kerf = 0.05;
 
   // How thick is the material? This also is the tab height.
-  material_thickness = 4.75;
+  material_thickness = 6;
 
   // How high is the battery case?
-  battery_case_height = 16;
+  battery_case_height = 20;
 
   // How large is our servo hole?
   servo_height = 21.5;
@@ -49,7 +49,7 @@
   sled_length = 80.5;
 
   // How wide is the sumo bot?
-  sled_width = 63.5;
+  sled_width = 66;
 
   // How close to the edge of the material do we place a tab?
   tab_edge_distance = 5;
@@ -64,7 +64,7 @@
   shovel_width = 100;
 
   // How high is the shovel?
-  shovel_height = 45;
+  shovel_height = 70;
 
   // Only for a 3D printed, curved shovel, how tall is the side?
   shovel_side_height = 20;
@@ -83,7 +83,7 @@
   caster_position = 12;
 
   // How big are our wheels?
-  wheel_radius = 30;
+  wheel_radius = 35;
 
   // Caster Settings
   Caster_WallThickness = 2;
@@ -102,6 +102,10 @@
       [6-(kerf/2), 4, 1.1, 2.5],
       [25, 0.3, 0.7, 0.1]
   ];
+  
+  // Wire Management
+  wire_management = 1;
+  wire_management_width = 30;
 
 /* Calculated Values */
 
@@ -136,8 +140,10 @@ module tab() {
 
 // Female side of the tab
 module tab_hole() {
+    // removed the tab spacing as its not a tight fit
 	translate([tab_spacing/-2,tab_spacing/-2])
-		square([tab_length + tab_spacing, material_thickness +tab_spacing]);
+		//square([tab_length + tab_spacing, material_thickness +tab_spacing]);
+		square([tab_length, material_thickness]);
 }
 
 // A ziptie hole
@@ -164,14 +170,14 @@ module caster() {
 module servo_hole() {
 	square([servo_length, servo_height]);
 	// screw holes
-	translate([-4.5,(servo_height/2)+5])
-		screw_hole();
-	translate([-4.5,(servo_height/2)-5])
-		screw_hole();
-	translate([servo_length+4.5,(servo_height/2)+5])
-		screw_hole();
-	translate([servo_length+4.5,(servo_height/2)-5])
-		screw_hole();
+	//translate([-4.5,(servo_height/2)+5])
+	//	screw_hole();
+	//translate([-4.5,(servo_height/2)-5])
+		//screw_hole();
+	//translate([servo_length+4.5,(servo_height/2)+5])
+		//screw_hole();
+	//translate([servo_length+4.5,(servo_height/2)-5])
+		//screw_hole();
 	// wire hole
 	hull() {
 		translate([servo_length-1,servo_height/2])
@@ -352,19 +358,27 @@ module bottom(built_in_caster=built_in_caster) {
 			translate([caster_position, sled_width/2 + caster_screw_spacing/2]) screw_hole();
 			translate([caster_position, sled_width/2 - caster_screw_spacing/2]) screw_hole();
 		}
-
+        // wire management hole
+        translate([caster_position +30, sled_width/2]) circle(d=20);
+    
+        //line sensors holes
+        translate([19, 5]) screw_hole();
+        translate([19, sled_width -5]) screw_hole();
+        translate([side_length -19, 5]) screw_hole();
+        translate([side_length -19, sled_width -5]) screw_hole();
+        
 		// Ziptie Holes
 		translate([side_length - servo_length - tab_length - tab_edge_distance -
-				tab_edge_distance - ziptie_width, servo_height/2 - (ziptie_height/2)])
+				tab_edge_distance - ziptie_width, servo_height/2 - (ziptie_height/4)])
 			ziptie_hole(); // Bottom Left
 		translate([side_length - servo_length - tab_length - tab_edge_distance -
-				tab_edge_distance - ziptie_width, sled_width - ziptie_height - servo_height/2 + (ziptie_height/2)])
+				tab_edge_distance - ziptie_width, sled_width - ziptie_height - servo_height/2 + (ziptie_height/4)])
 			ziptie_hole(); // Top Left
 		translate([side_length - tab_length - tab_edge_distance - tab_edge_distance,
-				servo_height/2 - (ziptie_height/2)])
+				servo_height/2 - (ziptie_height/4)])
 			ziptie_hole(); // Bottom Right
 		translate([side_length - tab_length - tab_edge_distance - tab_edge_distance,
-				sled_width - ziptie_height - servo_height/2 + (ziptie_height/2)])
+				sled_width - ziptie_height - servo_height/2 + (ziptie_height/4)])
 			ziptie_hole(); // Top Right
 	}
 	// Caster
@@ -392,6 +406,10 @@ module top() {
 			translate([sled_length-tab_length-tab_edge_distance,-material_thickness])
 				tab();
       }
+      if (wire_management) {
+      translate([0,sled_width/2])
+      wireManager();
+      }
       translate([sled_length/2,sled_width/2]) arduino_holes();
     }
     if ( pinoccio_top ) {
@@ -401,16 +419,27 @@ module top() {
 	}
 }
 
+// The top of the sumobot. [: ;]
+module wireManager() {
+    translate([0, -wire_management_width/2])
+    square([8,wire_management_width]);
+}
+
 // The front of the sumobot [ ' '' ]
 module shovel(curved_shovel=curved_shovel) {
 	union() {
 	linear_extrude(height=material_thickness)
 	difference() {
-		square([shovel_width, shovel_height]);
+		square([shovel_width, shovel_height+ 10]);
 		translate([ shovel_width/2 - sled_width/2, shovel_height/2 - tab_length/2])
 			rotate([0,0,90]) tab_hole();
 		translate([shovel_width/2 + sled_width/2 + material_thickness, shovel_height/2 - tab_length/2])
 			rotate([0,0,90]) tab_hole();
+        // sensor hole
+        translate([ shovel_width/2 - 13, shovel_height/2 - tab_length/2])
+			rotate([0,0,90]) circle(d=17);
+        translate([ shovel_width/2 + 13, shovel_height/2 - tab_length/2])
+			rotate([0,0,90]) circle(d=17);
 	}
 	if (curved_shovel) {
 		shovel_side();
@@ -457,7 +486,7 @@ module laser_sheet(spacing=2) {
 	$fn = 50;
 
 	// Right Side
-	translate([sled_length+spacing, sled_height+spacing]) mirror([1,0,0])
+	translate([sled_length+spacing, sled_height+15+spacing]) mirror([1,0,0])
 		side();
 	translate([ramp_length+spacing,-shovel_height - spacing])
 		side();
@@ -469,7 +498,7 @@ module laser_sheet(spacing=2) {
 
 	// Left Side
 	translate([0,-wheel_radius/2]) {
-		translate([-wheel_radius,sled_width+wheel_radius+material_thickness])
+		translate([-wheel_radius,sled_width+15+wheel_radius+material_thickness])
 			wheel(built_in_hub=0);
 		translate([-sled_length - ramp_length, 0])
 			top();
