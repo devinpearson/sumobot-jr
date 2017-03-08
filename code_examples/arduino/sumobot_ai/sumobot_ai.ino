@@ -7,7 +7,7 @@ Servo servoRight;         // Define right servo
 #define echoPin 12
 #define leftLinePin A0
 #define rightLinePin A1
-#define proxInterval 500
+#define proxInterval 750
 
 unsigned long previousMillis = 0;        // will store last time LED was updated
 unsigned long proxPreviousMillis = 0;
@@ -26,12 +26,13 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   Serial.begin(9600);
-  demo();
+  //demo();
   makeMove();
 } 
 
 void loop() {            // Loop through motion tests
   checkLineSensors();
+  readProximity();
   moveTimer();
   delay(2);
 }
@@ -58,7 +59,7 @@ void moveTimer() {
 void readProximity() {
   unsigned long currentMillis = millis();
 
-    if (currentMillis - previousMillis >= proxInterval) {
+    if (currentMillis - proxPreviousMillis >= proxInterval) {
       // save the last time you blinked the LED
       proxPreviousMillis = currentMillis;
      
@@ -79,10 +80,11 @@ void readProximity() {
         //digitalWrite(led,LOW);
         //digitalWrite(led2,HIGH);
       }
-      if (distance >= 200 || distance <= 0){
+      if (distance >= 70 || distance <= 0){
         Serial.println("Out of range");
       }
       else {
+        foundObject();
         Serial.print(distance);
         Serial.println(" cm");
       }
@@ -149,7 +151,7 @@ void pop() {
 
 // Motion routines for forward, reverse, turns, and stop
 void forward() {
-  interval = 3000;
+  interval = 1000;
   servoLeft.write(0);
   servoRight.write(180);
 }
@@ -187,9 +189,17 @@ void demo() {
 void avoidLine(int direct) {
   moveArray[0] = 0;
   moveArray[1] = direct;
-  moveArray[2] = 1;
-  moveArray[3] = 0;
+  moveArray[2] = 3;
+  moveArray[3] = 4;
   moveArray[4] = 0;
+}
+
+void foundObject() {
+  moveArray[0] = 0;
+  moveArray[1] = 1;
+  moveArray[2] = 1;
+  moveArray[3] = 1;
+  moveArray[4] = 1;
 }
 
 void stopAll() {
