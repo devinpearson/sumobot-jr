@@ -67,9 +67,9 @@ void readProximity() {
       digitalWrite(trigPin, LOW);  // Added this line
       delayMicroseconds(2); // Added this line
       digitalWrite(trigPin, HIGH);
-    //  delayMicroseconds(1000); - Removed this line
-      delayMicroseconds(10); // Added this line
-      //digitalWrite(trigPin, LOW);
+      delayMicroseconds(10); //- Removed this line
+      //delayMicroseconds(300); // Added this line
+      digitalWrite(trigPin, LOW);
       duration = pulseIn(echoPin, HIGH);
       distance = (duration/2) / 29.1;
       if (distance < 4) {  // This is where the LED On/Off happens
@@ -131,6 +131,10 @@ void makeMove() {
       case 4:
         turnLeft();
         break;
+      case 5:
+        shortForward();
+        //Serial.print("\n forward");
+        break;
       default:
         interval = 0;
         stopRobot();
@@ -156,6 +160,12 @@ void forward() {
   servoRight.write(180);
 }
 
+void shortForward() {
+  interval = 200;
+  servoLeft.write(0);
+  servoRight.write(180);
+}
+
 void reverse() {
   interval = 1000;
   servoLeft.write(180);
@@ -163,12 +173,12 @@ void reverse() {
 }
 
 void turnRight() {
-  interval = 600;
+  interval = 300;
   servoLeft.write(180);
   servoRight.write(180);
 }
 void turnLeft() {
-  interval = 600;
+  interval = 300;
   servoLeft.write(0);
   servoRight.write(0);
 }
@@ -186,11 +196,19 @@ void demo() {
   moveArray[4] = 0;
 }
 
+void sweep() {
+  moveArray[0] = 3;
+  moveArray[1] = 4;
+  moveArray[2] = 3;
+  moveArray[3] = 4;
+  moveArray[4] = 1;
+}
+
 void avoidLine(int direct) {
   moveArray[0] = 0;
   moveArray[1] = direct;
-  moveArray[2] = 3;
-  moveArray[3] = 4;
+  moveArray[2] = direct;
+  moveArray[3] = 5;
   moveArray[4] = 0;
 }
 
