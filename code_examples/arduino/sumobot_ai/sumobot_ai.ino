@@ -26,8 +26,11 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   Serial.begin(9600);
-  //demo();
+  
+  moveArray[0] = 0;
   makeMove();
+  delay(2000);
+  moveArray[0] = 5;
 } 
 
 void loop() {            // Loop through motion tests
@@ -135,6 +138,14 @@ void makeMove() {
         shortForward();
         //Serial.print("\n forward");
         break;
+      case 6:
+        turnLeftSlow();
+        //Serial.print("\n forward");
+        break;
+      case 7:
+        turnRightSlow();
+        //Serial.print("\n forward");
+        break;
       default:
         interval = 0;
         stopRobot();
@@ -150,7 +161,7 @@ void pop() {
   moveArray[1] = moveArray[2];
   moveArray[2] = moveArray[3];
   moveArray[3] = moveArray[4];
-  moveArray[4] = 0;
+  moveArray[4] = 7;
 }
 
 // Motion routines for forward, reverse, turns, and stop
@@ -161,7 +172,7 @@ void forward() {
 }
 
 void shortForward() {
-  interval = 200;
+  interval = 2000;
   servoLeft.write(0);
   servoRight.write(180);
 }
@@ -181,6 +192,17 @@ void turnLeft() {
   interval = 300;
   servoLeft.write(0);
   servoRight.write(0);
+}
+
+void turnRightSlow() {
+  interval = 300;
+  servoLeft.write(95);
+  servoRight.write(95);
+}
+void turnLeftSlow() {
+  interval = 300;
+  servoLeft.write(85);
+  servoRight.write(85);
 }
 
 void stopRobot() {
