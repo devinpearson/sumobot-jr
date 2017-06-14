@@ -26,6 +26,9 @@ int moveArray[5];                 // the move buffer. sets the size of the buffe
 
 boolean sensorsTriggered = false; // flag for keeping tabs on whether the line sensors have been triggered
 
+unsigned long proxPreviousMillis = 0;
+
+  #define proxInterval 750
 /**
  * Setup Pins and initialise the bot
  */
@@ -75,6 +78,11 @@ void moveTimer() {
  * Checks the proximity sensor for any opponents ahead of it
  */
 void readProximity() {
+
+  unsigned long currentMillis = millis();
+  if (currentMillis - proxPreviousMillis >= proxInterval) {
+       // save the last time you blinked the LED
+       proxPreviousMillis = currentMillis;
     long duration, distance;
     // the proximity sensor is triggered by a HIGH pulse of 2 or more microseconds.
     // give a short LOW pulse beforehand to ensure a clean HIGH pulse:
@@ -98,6 +106,7 @@ void readProximity() {
       Serial.print(distance);
       Serial.println(" cm");
     }
+  }
 }
 /**
  * Checks the line sensors for the edge.
@@ -204,7 +213,7 @@ void shortForward() {
 }
 
 void reverse() {
-  interval = 1000;
+  interval = 500;
   servoLeft.write(180);
   servoRight.write(0);
 }
@@ -262,10 +271,10 @@ void sweep() {
  * used when a line is triggered to move away and face the inside of the arena again
  */
 void avoidLine(int direct) {
-  moveArray[0] = 0;
+  moveArray[0] = 2;
   moveArray[1] = direct;
   moveArray[2] = direct;
-  moveArray[3] = 5;
+  moveArray[3] = 0;
   moveArray[4] = 0;
 }
 /**
