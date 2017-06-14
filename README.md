@@ -30,7 +30,7 @@ There is also a directory called 3d_print that contains an STL file for a ball c
 
 Neither do I! The best way to get some help creating the parts is to look up your local [Hackerspace or Makerspace ](http://hackerspaces.org) and connect with them. Our Johannesburg makerspace called [Makerlabs](http://makerlabs.co.za) hosted at [Made In Workshop](http://madeinworkshop.co.za/)
 
-[<img src="https://github.com/devinpearson/sumobot-jr/raw/master/assets/makerlabs">](http://makerlabs.co.za)
+[<img src="https://github.com/devinpearson/sumobot-jr/raw/master/assets/makerlabs.jpg">](http://makerlabs.co.za)
 
 If you don't have a hackerspace nearby, you can also use a mail order service like [Ponoko](http://ponoko.com) that does both 3D printing and laser cutting.
 
