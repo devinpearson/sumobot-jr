@@ -8,6 +8,8 @@ Makerlabs Sumobot is a forked open source sumobot design by [@makenai]. We kept 
 
 If you're planning on laser cutting the bots, you should use the OpenSCAD source file to generate a cutting plan for your specific type of laser cutter and material thickness. There's a wiki article for that!
 
+<img src="https://github.com/devinpearson/sumobot-jr/raw/master/assets/test.gif">
+
 [Laser Cutting with the OpenSCAD file](https://github.com/makenai/sumobot-jr/wiki/Working-with-the-OpenSCAD-file)
 
 If you want to jump right into it, you can watch this instructional video, but note that you may not want to clip the wires if you plan to reuse the servos for something else:
@@ -24,13 +26,11 @@ The main part of the design is a cutting sheet in EPS file format that is design
 
 There is also a directory called 3d_print that contains an STL file for a ball caster designed by [sliptonic](http://www.thingiverse.com/thing:13782) - the STL is set up for a 16mm ball bearing, but you can make one for other sizes with the included OpenSCAD file.
 
-[<img src="https://github.com/makenai/sumobot-jr/raw/master/assets/3dprintsumo.png">](http://www.thingiverse.com/thing:357369)
-
 ## What if I don't have a Laser Cutter / 3D Printer?!
 
 Neither do I! The best way to get some help creating the parts is to look up your local [Hackerspace or Makerspace ](http://hackerspaces.org) and connect with them. Our Johannesburg makerspace called [Makerlabs](http://makerlabs.co.za) hosted at [Made In Workshop](http://madeinworkshop.co.za/)
 
-[<img src="https://github.com/makenai/sumobot-jr/raw/master/assets/synshop.png">](http://synshop.org)
+[<img src="https://github.com/devinpearson/sumobot-jr/raw/master/assets/makerlabs">](http://makerlabs.co.za)
 
 If you don't have a hackerspace nearby, you can also use a mail order service like [Ponoko](http://ponoko.com) that does both 3D printing and laser cutting.
 
