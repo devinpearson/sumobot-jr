@@ -1,8 +1,8 @@
-# Sumobot Jr.
+# Makerlabs Sumobot.
 
-Sumobot Jr. is an open source sumobot design made for [Nodebots Day](http://nodebotsday.com). Most existing sumo kits cost between $99 and $160. Since we're trying to keep our event costs down, I decided to try to design a bot that could be put together for around $50 including the cost of the Arduino. The name and design are inspired by the simplicity and zip-tied wooden beauty of the [Printrbot Jr](http://printrbot.com/).
+Makerlabs Sumobot is a forked open source sumobot design by [@makenai]. We kept the design similar but added a few new cut outs to allow some line sensors and a proximity sensor in the scoop. The Makerlabs Sumobot is intended to be a autonomous fighting bot, using it as a platform for other autonomous challenges like mazes.
 
-<img src="https://github.com/makenai/sumobot-jr/raw/master/assets/sumobotjr.png">
+<img src="https://github.com/devinpearson/sumobot-jr/raw/master/assets/bot_faceoff.jpeg">
 
 ## How ?
 
@@ -23,10 +23,6 @@ If you want to jump right into it, you can watch this instructional video, but n
 The main part of the design is a cutting sheet in EPS file format that is designed to be used with a laser cutter. You can find it in the cutting_plans directory. If you don't have a laser cutter, you can use a CNC, tape your printout to balsa wood and go at it with an x-acto knife, or send it to a laser cutting service like [Ponoko](https://www.ponoko.com/) and get the sheet done for about $10.
 
 There is also a directory called 3d_print that contains an STL file for a ball caster designed by [sliptonic](http://www.thingiverse.com/thing:13782) - the STL is set up for a 16mm ball bearing, but you can make one for other sizes with the included OpenSCAD file.
-
-**NEW** Microsoft has created a tutorial and version of the bot kit for [Build 2015](http://www.buildwindows.com/). You can find their version of the cutting plan for Ponoko in this repository, and also check out their [tutorial using Raspberry Pi and Windows 10](http://microsoft.hackster.io/windowsiot/robot-kit).
-
-There is a completely 3D printable version available at [Thingiverse](http://www.thingiverse.com/thing:357369) now.
 
 [<img src="https://github.com/makenai/sumobot-jr/raw/master/assets/3dprintsumo.png">](http://www.thingiverse.com/thing:357369)
 
@@ -49,37 +45,17 @@ If you don't have a hackerspace nearby, you can also use a mail order service li
 + Some wire or leads
 + 16mm steel ball from a Bearing shop like BMG - ~R6
 
-## No-solder Wiring Diagram (thanks @katiek2)
+## Wiring Diagram (thanks @Buglish)
 
-<img src=https://github.com/KatieK2/sumobot-nosolder/blob/gh-pages/sumobot.png width=500 />
+<img src=https://github.com/devinpearson/sumobot-jr/raw/master/assets/SumoBotV1.1_wiring_diagram.jpg width=500 />
 
 That's about it! Connect the red and black leads on the servos together, then connect them to the + and - terminals on the battery holder respectively. Then connect the black leads and - terminal to the ground of the Arduino. Finally, the white leads of each motor go to pins 9 and 10 (or whatever you like) on the Arduino - you're done!
 
 ## Sample Code
 
-To run the sample code for the Sumobot Jr., you will first need to install [Node.js](http://nodejs.org/) and [git](https://git-scm.com).
+<img src=https://github.com/devinpearson/sumobot-jr/raw/master/assets/code_snippet.png width=500 />
 
-Open a terminal application and clone this repository:
-```
-git clone https://github.com/makenai/sumobot-jr
-```
-
-Navigate to the code folder:
-```
-cd code_examples/node
-```
-
-Install code dependencies:
-
-```
-npm i
-```
-
-Run the code:
-
-```
-node sumobot.js
-```
+To run the sample code. just upload any of the sketches in the code_examples/arduino folder
 
 Robot Sumo league
 
